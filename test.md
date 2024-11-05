@@ -1,0 +1,10 @@
+- NFT marketplace <!-- Marketplace -->
+  - Marketplace
+    - Search item
+      - View NFT item
+    - View NFT item
+      - Add item to whishlist
+      - Remove item to whishlist
+      - Buy item
+  - Wishlist
+    - View NFT item

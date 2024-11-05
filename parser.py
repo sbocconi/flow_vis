@@ -3,27 +3,28 @@ import plotly.graph_objects as go
 
 class WebPage:
 
-    current_pageID = None
+    current_pageID = -1
 
     @classmethod
-    def gen_id(cls,page):
-        page.name
+    def gen_id(cls):
+        cls.current_pageID = cls.current_pageID + 1
+        return cls.current_pageID
     
     @classmethod
     def add_page(cls, name, level, website):
         # breakpoint()
         page = website.get_page(name=name)
         if page == None:
-            page = WebPage(name, level, website)
+            page = WebPage(name, WebPage.current_pageID, level, website)
             website.add_page(page)
         else:
             page.add_level(level)
         return page
 
 
-    def __init__(self, name, level, website):
+    def __init__(self, name, id, level, website):
         self.name = name
-        self.pageID = WebPage.gen_id(self)
+        self.pageID = WebPage.gen_id()
         self.website = website
         self.children = []
         self.levels = [level]
@@ -39,10 +40,11 @@ class WebPage:
             print(f"Child {child} already children of {self.name}")
 
     def add_level(self, level):
-        if level not in self.levels:
-            self.levels.append(level)
-        else:
-            print(f"Level {level} already in {self.name}")
+        # if level not in self.levels:
+        #     self.levels.append(level)
+        # else:
+        #     print(f"Level {level} already in {self.name}")
+        self.levels.append(level)
 
 
     def _add_parent(self, parent):
@@ -52,7 +54,6 @@ class WebPage:
             print(f"Parent {parent} already parent of {self.name}")
 
 class Website:
-    
     
     def __init__(self, name):
         self.name = name
@@ -155,21 +156,20 @@ class Parser:
 
         return ws
 
-def loop(page, id, sources, targets, labels, values, color_links, color_nodes):
+def loop(page, sources, targets, values, color_links, color_nodes, known_nodes):
     # breakpoint()
-    labels.append(page.name)
-    last_id = id
     for child in page.children:
-        last_id = last_id + 1
-        sources.append(id)
-        targets.append(last_id)
+        # print(f"Add connection from {page.name} to {child.name}")
+        sources.append(page.pageID)
+        targets.append(child.pageID)
         values.append(1)
         color_links.append('#EBBAB5')
         color_nodes.append('#808B96')
-        # print(f"Add connection from {page.name} to {child.name}")
-        last_id = loop(child, last_id, sources, targets, labels, values, color_links, color_nodes)
+        if child.pageID not in known_nodes:
+            loop(child, sources, targets, values, color_links, color_nodes, known_nodes)
+            known_nodes.append(child.pageID)
         
-    return last_id
+    return
 
 
 
@@ -181,8 +181,14 @@ def make_Sankey(ws):
     values = []
     color_links = []
     color_nodes = []
+    known_nodes = []
 
-    loop(ws.root, 0, sources, targets, labels, values, color_links, color_nodes)
+    for page_name in ws.page_list:
+        page = ws.page_list[page_name]
+        # print(f"{page.name} : {page.pageID}")
+        labels.append(page.name)
+
+    loop(ws.root, sources, targets, values, color_links, color_nodes, known_nodes)
 
     # print(sources)
     # print(targets)
@@ -200,6 +206,7 @@ def make_Sankey(ws):
 
 def main():
     p = Parser("./sitemap.md")
+    # p = Parser("./test.md")
     ws = p.parse()
 
     # breakpoint()

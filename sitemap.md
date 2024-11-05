@@ -1,25 +1,10 @@
-<!-- Faq & Chat -->
-- Registration/login
-  - Faq & chat
-    - General q's
-      - Any question
-    - How-to videos
-      - Watching any video
-    - Contact us
-      - Edit contact form
-        - Send contact form
-      - Subscribe to newsletter
-  - Connect wallet <!-- Connect Wallet  -->
-  - Profile <!-- Fill in/visit Profile -->
-    - Edit profile
-      - Save profile
-    - Change password
+- Registration/login 
   - Content management <!-- Content Management -->
     - My contents
       - Add content
         - Edit new content form
           - Save new content form
-    - Url
+    - Open url
     - Actions
       - View content
       - Edit content
@@ -53,3 +38,56 @@
             - Save member
           - Remove member
             - Confirm remove member
+  - DAO <!-- DAO -->
+    - Proposals
+      - Add voting proposal
+      - View proposal details
+        - Vote for proposal
+  - NFT marketplace <!-- Marketplace -->
+    - Marketplace
+      - Search item
+        - View NFT item
+      - Filter item by tag
+        - View NFT item
+      - Filter by recommendation
+        - View NFT item
+      - View NFT item
+        - Add item to whishlist
+        - Remove item to whishlist
+        - Buy item
+        - Put item on sale
+        - Remove item on sale
+        - Star item
+        - Report item
+        - Share item
+      - Upload item
+        - As NFT
+        - As free item
+    - Wishlist
+      - View NFT item
+      - Add item to whishlist
+      - Remove item to whishlist
+    - Portfolio
+      - View NFT item
+      - Add item to whishlist
+      - Remove item to whishlist
+      - Created
+        - View NFT item
+  - Tools catalogue <!-- Tools catalogue -->
+    - See more of any tool
+      - Download tool
+    - Go to any tool
+  - Faq & chat <!-- Faq & Chat -->
+    - General q's
+      - Any question
+    - How-to videos
+      - Watching any video
+    - Contact us
+      - Edit contact form
+        - Send contact form
+      - Subscribe to newsletter
+  - Connect wallet <!-- Connect Wallet  -->
+  - Profile <!-- Fill in/visit Profile -->
+    - Edit profile
+      - Save profile
+    - Change password
