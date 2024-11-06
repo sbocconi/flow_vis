@@ -74,9 +74,42 @@
       - Created
         - View NFT item
   - Tools catalogue <!-- Tools catalogue -->
-    - See more of any tool
-      - Download tool
-    - Go to any tool
+    - See more of Style Transfer - Synelixis
+      - Download Style Transfer - Synelixis
+    - See more of Art Generator - Synelixis
+      - Download Art Generator - Synelixis
+    - See more of 3D Object Reconstruction - CERTH
+      - Download 3D Object Reconstruction - CERTH
+    - See more of 3D Human Pose Estimation - CERTH
+      - Download 3D Human Pose Estimation - CERTH
+    - See more of Virtual Avatar Personalization - CERTH
+      - Download Virtual Avatar Personalization - CERTH
+    - See more of WebPd - Sebastien Piquemal (IRCAM?)
+      - Download WebPd - Sebastien Piquemal (IRCAM?)
+    - See more of RAVE - IRCAM
+      - Download RAVE - IRCAM
+    - See more of nn~ - Antoine Caillon (IRCAM?)
+      - Download nn~ - Antoine Caillon (IRCAM?)
+    - See more of Dicy2 - IRCAM
+      - Download Dicy2 - IRCAM
+    - See more of Spat - IRCAM
+      - Download Spat - IRCAM
+    - See more of Soundworks - Benjamin Matuszewski (collective-soundworks, IRCAM)
+      - Download Soundworks - Benjamin Matuszewski (collective-soundworks, IRCAM)
+    - See more of CoMo Elements - IRCAM
+      - Download CoMo Elements - IRCAM
+    - Go to Style Transfer - Synelixis
+    - Go to Art Generator - Synelixis
+    - Go to 3D Object Reconstruction - CERTH
+    - Go to 3D Human Pose Estimation - CERTH
+    - Go to Virtual Avatar Personalization - CERTH
+    - Go to WebPd - Sebastien Piquemal (IRCAM?)
+    - Go to RAVE - IRCAM
+    - Go to nn~ - Antoine Caillon (IRCAM?)
+    - Go to Dicy2 - IRCAM
+    - Go to Spat - IRCAM
+    - Go to Soundworks - Benjamin Matuszewski (collective-soundworks, IRCAM)
+    - Go to CoMo Elements - IRCAM
   - Faq & chat <!-- Faq & Chat -->
     - General q's
       - Any question

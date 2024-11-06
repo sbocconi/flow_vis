@@ -15,27 +15,28 @@ class WebPage:
         # breakpoint()
         page = website.get_page(name=name)
         if page == None:
-            page = WebPage(name, WebPage.current_pageID, level, website)
+            page = WebPage(name, level, website)
             website.add_page(page)
         else:
             page.add_level(level)
         return page
 
 
-    def __init__(self, name, id, level, website):
+    def __init__(self, name, level, website):
         self.name = name
         self.pageID = WebPage.gen_id()
         self.website = website
         self.children = []
         self.levels = [level]
-        self.parent = None
+        self.parents = []
+        self.visits = 0
         # print(f"Page **{self.name}** created")
 
 
     def add_child(self, child):
         if child not in self.children:
             self.children.append(child)
-            # child._add_parent(self)
+            child._add_parent(self)
         else:
             print(f"Child {child} already children of {self.name}")
 
@@ -48,8 +49,8 @@ class WebPage:
 
 
     def _add_parent(self, parent):
-        if self.parent == None:
-            self.parent = parent
+        if parent not in self.parents:
+            self.parents.append(parent)
         else:
             print(f"Parent {parent} already parent of {self.name}")
 
@@ -155,18 +156,38 @@ class Parser:
                     parent.add_child(page)
 
         return ws
+def make_values(page, known_nodes, known_links):
+    for child in page.children:
+        # print(f"Following connection from {page.name} to {child.name}")
+        make_values(child, known_nodes, known_links)
+        
+        if child.pageID not in known_nodes:
+            if len(child.children) == 0:
+                # print(f"Initializing visits to 1 for {child.name}")
+                child.visits = 1
+        
+            contrib = child.visits/len(child.parents)
+            for parent in child.parents:
+                # print(f"Bubbling {contrib} visits from {child.name} to {parent.name}")
+                parent.visits = parent.visits + contrib
+                known_links[f"{parent.pageID} - {child.pageID}"] = contrib
+            known_nodes.append(child.pageID)
 
-def loop(page, sources, targets, values, color_links, color_nodes, known_nodes):
+
+def make_links(page, sources, targets, values, color_links, color_nodes, known_nodes, known_links):
     # breakpoint()
+    
+
     for child in page.children:
         # print(f"Add connection from {page.name} to {child.name}")
         sources.append(page.pageID)
         targets.append(child.pageID)
-        values.append(1)
+        value = known_links[f"{page.pageID} - {child.pageID}"]
+        values.append(value)
         color_links.append('#EBBAB5')
         color_nodes.append('#808B96')
         if child.pageID not in known_nodes:
-            loop(child, sources, targets, values, color_links, color_nodes, known_nodes)
+            make_links(child, sources, targets, values, color_links, color_nodes, known_nodes, known_links)
             known_nodes.append(child.pageID)
         
     return
@@ -182,13 +203,20 @@ def make_Sankey(ws):
     color_links = []
     color_nodes = []
     known_nodes = []
+    known_links = {}
 
     for page_name in ws.page_list:
         page = ws.page_list[page_name]
         # print(f"{page.name} : {page.pageID}")
         labels.append(page.name)
 
-    loop(ws.root, sources, targets, values, color_links, color_nodes, known_nodes)
+
+    make_values(ws.root, known_nodes, known_links)
+    breakpoint()
+
+    known_nodes = []
+    make_links(ws.root, sources, targets, values, color_links, color_nodes, known_nodes, known_links)
+    
 
     # print(sources)
     # print(targets)
