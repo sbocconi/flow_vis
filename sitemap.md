@@ -74,42 +74,71 @@
       - Created
         - View NFT item
   - Tools catalogue <!-- Tools catalogue -->
-    - See more of Style Transfer - Synelixis
-      - Download Style Transfer - Synelixis
-    - See more of Art Generator - Synelixis
-      - Download Art Generator - Synelixis
+<!--    - See more of Art Generator - SYN -->
+<!--      - Download Art Generator - SYN -->
+    - See more of Style Transfer - SYN 
+      - Visit repository Style Transfer - SYN
+      - Go to Style Transfer - SYN 
     - See more of 3D Object Reconstruction - CERTH
-      - Download 3D Object Reconstruction - CERTH
+      - Visit repository 3D Object Reconstruction - CERTH
+      - Go to 3D Object Reconstruction - CERTH
     - See more of 3D Human Pose Estimation - CERTH
-      - Download 3D Human Pose Estimation - CERTH
+      - Visit repository 3D Human Pose Estimation - CERTH
+      - Go to 3D Human Pose Estimation - CERTH
     - See more of Virtual Avatar Personalization - CERTH
-      - Download Virtual Avatar Personalization - CERTH
-    - See more of WebPd - Sebastien Piquemal (IRCAM?)
-      - Download WebPd - Sebastien Piquemal (IRCAM?)
+      - Visit repository Virtual Avatar Personalization - CERTH
+      - Go to Virtual Avatar Personalization - CERTH
+    - See more of WebPd - IRCAM
+      - Visit repository WebPd - IRCAM
+      - Go to WebPd - IRCAM
     - See more of RAVE - IRCAM
       - Download RAVE - IRCAM
-    - See more of nn~ - Antoine Caillon (IRCAM?)
-      - Download nn~ - Antoine Caillon (IRCAM?)
+      - Visit repository RAVE - IRCAM
+      - Go to RAVE - IRCAM
+    - See more of nn~ - IRCAM
+      - Download nn~ - IRCAM
+      - Visit repository nn~ - IRCAM
+      - Go to nn~ - IRCAM
     - See more of Dicy2 - IRCAM
       - Download Dicy2 - IRCAM
+      - Visit repository Dicy2 - IRCAM
+      - Go to Dicy2 - IRCAM
     - See more of Spat - IRCAM
       - Download Spat - IRCAM
-    - See more of Soundworks - Benjamin Matuszewski (collective-soundworks, IRCAM)
-      - Download Soundworks - Benjamin Matuszewski (collective-soundworks, IRCAM)
+      - Visit repository Spat - IRCAM
+      - Go to Spat - IRCAM
+    - See more of Soundworks - IRCAM
+      - Download Soundworks - IRCAM
+      - Visit repository Soundworks - IRCAM
+      - Go to Soundworks - IRCAM
     - See more of CoMo Elements - IRCAM
       - Download CoMo Elements - IRCAM
-    - Go to Style Transfer - Synelixis
-    - Go to Art Generator - Synelixis
+      - Visit repository CoMo Elements - IRCAM
+      - Go to CoMo Elements - IRCAM
+
+<!-- Go to Art Generator - SYN -->
+    - Go to Style Transfer - SYN
+      - Use Style Transfer - SYN :id:source: db:id:
     - Go to 3D Object Reconstruction - CERTH
+      - Use 3D Object Reconstruction - CERTH
     - Go to 3D Human Pose Estimation - CERTH
-    - Go to Virtual Avatar Personalization - CERTH
-    - Go to WebPd - Sebastien Piquemal (IRCAM?)
+      - Use 3D Human Pose Estimation - CERTH
+    - Go to Virtual Avatar Personalization - CERTH :id:test:false:id:
+      - Use Virtual Avatar Personalization - CERTH :id:source:db, test:false:id:
+    - Go to WebPd - IRCAM
+      - Use WebPd - IRCAM :id:source:db:id:
     - Go to RAVE - IRCAM
-    - Go to nn~ - Antoine Caillon (IRCAM?)
+      - Use RAVE - IRCAM :id:source:db:id:
+    - Go to nn~ - IRCAM
+      - Use nn~ - IRCAM :id:source:db:id:
     - Go to Dicy2 - IRCAM
+      - Use Dicy2 - IRCAM :id:source:db:id:
     - Go to Spat - IRCAM
-    - Go to Soundworks - Benjamin Matuszewski (collective-soundworks, IRCAM)
+      - Spat - IRCAM :id:source:db:id:
+    - Go to Soundworks - IRCAM
+      - Use Soundworks - IRCAM :id:source:db:id:
     - Go to CoMo Elements - IRCAM
+      - Use CoMo Elements - IRCAM :id:source:db:id:
   - Faq & chat <!-- Faq & Chat -->
     - General q's
       - Any question

@@ -11,21 +11,22 @@ class WebPage:
         return cls.current_pageID
     
     @classmethod
-    def add_page(cls, name, level, website):
+    def add_page(cls, name, level, website, metadata):
         # breakpoint()
         page = website.get_page(name=name)
         if page == None:
-            page = WebPage(name, level, website)
+            page = WebPage(name, level, website, metadata)
             website.add_page(page)
         else:
-            page.add_level(level)
+            page.add_attributes(level, metadata)
         return page
 
 
-    def __init__(self, name, level, website):
+    def __init__(self, name, level, website, metadata):
         self.name = name
         self.pageID = WebPage.gen_id()
         self.website = website
+        self.metadata = metadata
         self.children = []
         self.levels = [level]
         self.parents = []
@@ -40,12 +41,19 @@ class WebPage:
         else:
             print(f"Child {child} already children of {self.name}")
 
-    def add_level(self, level):
+    def add_attributes(self, level, metadata):
         # if level not in self.levels:
         #     self.levels.append(level)
         # else:
         #     print(f"Level {level} already in {self.name}")
         self.levels.append(level)
+        for key,value in metadata.items():
+            if key not in self.metadata:
+                self.metadata[key] = value
+            elif self.metadata[key] != value:
+                raise Exception(f"Node {self.name} has already a metadata entry for key {key} but a different value: {self.metadata[key]} != {value}")
+            else:
+                raise Exception(f"Node {self.name} has already a metadata entry for key: {key}, value: {value}")
 
 
     def _add_parent(self, parent):
@@ -60,6 +68,7 @@ class Website:
         self.name = name
         self.root = None
         self.page_list = {}
+        self.page_ids = {}
 
     def _set_root(self, page):
         if self.root != None:
@@ -85,11 +94,13 @@ class Website:
         
         return None
 
+
     def add_page(self, page):
         if self.get_page(page=page) == None:
             if page.levels[0] == 0:
                 self._set_root(page)
             self.page_list[f"{page.name}"] = page
+            self.page_ids[f"{page.pageID}"] = page
         else:
             print(f"Page {page.name} not added")
 
@@ -98,17 +109,33 @@ class Parser:
     
     START_COMMENT = "<!--"
     END_COMMENT = "-->"
+    START_METADATA = r":id:"
+    END_METADATA = r":id:"
+    SEP_METADATA = ','
+    SEP_METADATAITEM = ':'
     LISTSIGN = "- "
     MAX_IND = 20
 
     @classmethod
-    def _clean_name(cls, line, idx_listsign):
+    def _process_name(cls, line, idx_listsign):
         # breakpoint()
+        metadata = {}
         name = line[idx_listsign+len(cls.LISTSIGN):]
         my_regex = cls.START_COMMENT + r".*" +  cls.END_COMMENT
         name = re.sub(my_regex, '', name)
+        my_regex = cls.START_METADATA + r"(.*)" +  cls.END_METADATA
+        p = re.compile(my_regex)
+        m = p.search(name)
+        if m != None:
+            name = re.sub(my_regex, '', name)
+            records = m.group(1).split(cls.SEP_METADATA)
+            for record in records:
+                [key,value] = record.split(cls.SEP_METADATAITEM)
+                metadata[f"{key.strip()}"] = value.strip()
+            # breakpoint()
+
         name = name.rstrip()
-        return name
+        return name, metadata
 
         
 
@@ -124,6 +151,9 @@ class Parser:
         cur_ind_level = 0
 
         for i,line in enumerate(lines):
+            if len(line) == 0:
+                # Skip empty lines 
+                continue
             if not line.startswith(Parser.START_COMMENT):
                 if '\t' in line:
                     raise Exception(f"Tab found at line {i}, bailing out")
@@ -139,12 +169,13 @@ class Parser:
                 # print(f"Indirection is {ind_level}")
 
                 if ind_level > cur_ind_level + 1:
+                    # breakpoint()
                     raise Exception(f"Line {i} has gap in indentation")
 
                 cur_ind_level = ind_level
                 
-                page_name = Parser._clean_name(line, idx_listsign)
-                page = WebPage.add_page(page_name,ind_level,ws)
+                page_name, metadata = Parser._process_name(line, idx_listsign)
+                page = WebPage.add_page(page_name,ind_level,ws, metadata)
                 # breakpoint()
                                
                 parents[ind_level] = page
@@ -156,91 +187,178 @@ class Parser:
                     parent.add_child(page)
 
         return ws
-def make_values(page, known_nodes, known_links):
-    for child in page.children:
-        # print(f"Following connection from {page.name} to {child.name}")
-        make_values(child, known_nodes, known_links)
+
+
+class SankeyGraph:
+    DB_NODE_COLOR = '#238b45'
+    DB_LINK_COLOR = '#74c476'
+
+    MATOMO_NODE_COLOR = '#999999'
+    MATOMO_LINK_COLOR = '#e0e0e0'
+
+    
+    def make_values(self, page):
+        '''
+            Recursive. Recreate a equally distributed flow
+            assuming all leaf nodes get one visit, by assigning
+            values to nodes and links.
+        '''
+        for child in page.children:
+            # print(f"Following connection from {page.name} to {child.name}")
+            self.make_values(child)
+            
+            if child.pageID not in self.known_nodes:
+                if len(child.children) == 0:
+                    # This is a leaf node.
+                    # print(f"Initializing visits to 1 for {child.name}")
+                    child.visits = 1
+            
+                # Calculate contribution to each parent
+                contrib = child.visits/len(child.parents)
+                # Divide flow among parents
+                for parent in child.parents:
+                    # print(f"Bubbling {contrib} visits from {child.name} to {parent.name}")
+                    parent.visits = parent.visits + contrib
+                    # Define the weight of the link (a link cannot happen twice between the same nodes)
+                    if f"{parent.pageID} - {child.pageID}" in self.known_links:
+                        raise Exception(f"Link {parent.name} - {child.name} already encountered")
+                    self.known_links[f"{parent.pageID} - {child.pageID}"] = contrib
+                self.known_nodes.append(child.pageID)
+
+
+
+    def make_links(self,page):
+        '''
+            Recursive. Create the links between the nodes.child
+            Assign also color to nodes and links.
+        '''
+        # breakpoint()
         
-        if child.pageID not in known_nodes:
-            if len(child.children) == 0:
-                # print(f"Initializing visits to 1 for {child.name}")
-                child.visits = 1
+        for child in page.children:
+            # print(f"Add connection from {page.name} to {child.name}")
+            self.sources.append(page.pageID)
+            self.targets.append(child.pageID)
+            value = self.known_links[f"{page.pageID} - {child.pageID}"]
+            self.values.append(value)
+                        
+            if child.pageID not in self.known_nodes:
+                self.make_links(child)
+                self.known_nodes.append(child.pageID)
+            
+        return
+
+
+    def make_node_labels(self, ws):
+        self.labels = [None for i in range(len(ws.page_list))]
+        for page_name in ws.page_list:
+            page = ws.page_list[page_name]
+            # print(f"{page.name} : {page.pageID}")
+            self.labels[page.pageID] = page.name
+
+    def make_node_colors(self, ws):
+        self.color_nodes = [None for i in range(len(ws.page_list))]
+        for page_name in ws.page_list:
+            page = ws.page_list[page_name]
+            if 'source' in page.metadata:
+                # breakpoint()
+                if page.metadata['source'] == 'db':
+                    self.color_nodes[page.pageID] = SankeyGraph.DB_NODE_COLOR                    
+            else:
+                self.color_nodes[page.pageID] = SankeyGraph.MATOMO_NODE_COLOR
+
+    def make_link_colors(self, ws):
+        self.color_links = []
+        # breakpoint()
+        for i in range(len(self.sources)):
+            sr = self.sources[i]
+            tg = self.targets[i]
+
+            sr_page = ws.page_ids[f"{sr}"]
+            tg_page = ws.page_ids[f"{tg}"]
+
+            if 'source' in tg_page.metadata:
+                # breakpoint()
+                if tg_page.metadata['source'] == 'db':
+                    self.color_links.append(SankeyGraph.DB_LINK_COLOR)
+            else:
+                self.color_links.append(SankeyGraph.MATOMO_LINK_COLOR)
+
+
+
+    def __init__(self, ws):
         
-            contrib = child.visits/len(child.parents)
-            for parent in child.parents:
-                # print(f"Bubbling {contrib} visits from {child.name} to {parent.name}")
-                parent.visits = parent.visits + contrib
-                known_links[f"{parent.pageID} - {child.pageID}"] = contrib
-            known_nodes.append(child.pageID)
+        self.values = []
+        self.known_nodes = []
+        self.known_links = {}
+        self.make_values(ws.root)
+        # breakpoint()
 
-
-def make_links(page, sources, targets, values, color_links, color_nodes, known_nodes, known_links):
-    # breakpoint()
-    
-
-    for child in page.children:
-        # print(f"Add connection from {page.name} to {child.name}")
-        sources.append(page.pageID)
-        targets.append(child.pageID)
-        value = known_links[f"{page.pageID} - {child.pageID}"]
-        values.append(value)
-        color_links.append('#EBBAB5')
-        color_nodes.append('#808B96')
-        if child.pageID not in known_nodes:
-            make_links(child, sources, targets, values, color_links, color_nodes, known_nodes, known_links)
-            known_nodes.append(child.pageID)
         
-    return
-
-
-
-def make_Sankey(ws):
-
-    sources = []
-    targets = []
-    labels = []
-    values = []
-    color_links = []
-    color_nodes = []
-    known_nodes = []
-    known_links = {}
-
-    for page_name in ws.page_list:
-        page = ws.page_list[page_name]
-        # print(f"{page.name} : {page.pageID}")
-        labels.append(page.name)
-
-
-    make_values(ws.root, known_nodes, known_links)
-    breakpoint()
-
-    known_nodes = []
-    make_links(ws.root, sources, targets, values, color_links, color_nodes, known_nodes, known_links)
+        self.sources = []
+        self.targets = []
+        self.known_nodes = []
     
+        self.make_links(ws.root)
+        self.make_node_labels(ws)
+        self.make_node_colors(ws)
+        self.make_link_colors(ws)
 
-    # print(sources)
-    # print(targets)
-    # print(labels)
-    
-    link = dict(source = sources, target = targets, value = values, color=color_links)
-    node = dict(label = labels, pad=15, thickness=5, color=color_nodes)
-    
-    data = go.Sankey(link = link, node=node)
-    # plot
-    fig = go.Figure(data)
-    fig.show()
+        # print(sources)
+        # print(targets)
+        # print(labels)
+        
+    def print_graph(self):
+        link = dict(source = self.sources, target = self.targets, value = self.values, color=self.color_links)
+        node = dict(label = self.labels, pad=15, thickness=5, color=self.color_nodes)
+        
+        data = go.Sankey(link = link, node=node)
+        # plot
+        fig = go.Figure(data)
+        fig.show()
 
     
 
-def main():
-    p = Parser("./sitemap.md")
+def main(filename, print):
+    p = Parser(filename)
     # p = Parser("./test.md")
     ws = p.parse()
 
     # breakpoint()
-    make_Sankey(ws)
+    gr = SankeyGraph(ws)
+    
+    if print:
+        gr.print_graph()
     
 
 
+if __name__ == "__main__":
+    import argparse
 
-main()
+    parser = argparse.ArgumentParser(
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+
+    parser.add_argument(
+        '-f', '--filename',
+        dest='filename',
+        action='store',
+        required=True,
+        help='specifies the name of the sitemap file',
+    )
+    parser.add_argument(
+        '-p', '--print',
+        dest='print',
+        action='store_true',
+        default=False,
+        help='specifies whether to print the graph',
+    )
+
+    args, unknown = parser.parse_known_args()
+
+    if len(unknown) > 0:
+        print(f'Unknown options {unknown}')
+        parser.print_help()
+        exit(-1)
+
+    main(args.filename, args.print)
