@@ -106,7 +106,7 @@ class Website:
 
 
 class Parser:
-    
+    # https://github.com/ikatyang/emoji-cheat-sheet
     START_COMMENT = "<!--"
     END_COMMENT = "-->"
     START_METADATA = r":id:"
@@ -154,7 +154,7 @@ class Parser:
             if len(line) == 0:
                 # Skip empty lines 
                 continue
-            if not line.startswith(Parser.START_COMMENT):
+            if not line.strip().startswith(Parser.START_COMMENT):
                 if '\t' in line:
                     raise Exception(f"Tab found at line {i}, bailing out")
                 idx_listsign = line.find(Parser.LISTSIGN)
@@ -163,6 +163,7 @@ class Parser:
                     raise Exception(f"No indentation found at line {i}, bailing out")
                 
                 if idx_listsign%2 != 0:
+                    # breakpoint()
                     raise Exception(f"Line {i} has wrong indentation")
 
                 ind_level = int(idx_listsign/2)
@@ -190,11 +191,27 @@ class Parser:
 
 
 class SankeyGraph:
-    DB_NODE_COLOR = '#238b45'
-    DB_LINK_COLOR = '#74c476'
+    # #7f7f7f from d3 color scheme Category10
+    # #bcbd22 from d3 color scheme Category10
+    # #17becf from d3 color scheme Category10
+    # #1f77b4 from d3 color scheme Category10
+    # #ff7f0e from d3 color scheme Category10
+    # #2ca02c from d3 color scheme Category10
+    # #d62728 from d3 color scheme Category10
+    # #9467bd from d3 color scheme Category10
+    # #8c564b from d3 color scheme Category10
+    # #e377c2 from d3 color scheme Category10
 
-    MATOMO_NODE_COLOR = '#999999'
+    # green red purple
+    # ['#1b9e77','#d95f02','#7570b3']
+    DB_NODE_COLOR = '#b2182b'
+    DB_LINK_COLOR = '#e0e0e0'
+    
+    MATOMO_NODE_COLOR = '#1b9e77'
     MATOMO_LINK_COLOR = '#e0e0e0'
+
+    NODE_COLOR = '#999999'
+    LINK_COLOR = '#e0e0e0'
 
     
     def make_values(self, page):
@@ -262,9 +279,13 @@ class SankeyGraph:
             if 'source' in page.metadata:
                 # breakpoint()
                 if page.metadata['source'] == 'db':
-                    self.color_nodes[page.pageID] = SankeyGraph.DB_NODE_COLOR                    
+                    self.color_nodes[page.pageID] = SankeyGraph.DB_NODE_COLOR
+                elif page.metadata['source'] == 'matomo':
+                    self.color_nodes[page.pageID] = SankeyGraph.MATOMO_NODE_COLOR
+                else:
+                    raise Exception(f"Unknown source: {page.metadata['source']}")
             else:
-                self.color_nodes[page.pageID] = SankeyGraph.MATOMO_NODE_COLOR
+                self.color_nodes[page.pageID] = SankeyGraph.NODE_COLOR
 
     def make_link_colors(self, ws):
         self.color_links = []
@@ -280,8 +301,12 @@ class SankeyGraph:
                 # breakpoint()
                 if tg_page.metadata['source'] == 'db':
                     self.color_links.append(SankeyGraph.DB_LINK_COLOR)
+                elif tg_page.metadata['source'] == 'matomo':
+                    self.color_links.append(SankeyGraph.MATOMO_LINK_COLOR)
+                else:
+                    raise Exception(f"Unknown source: {tg_page.metadata['source']}")
             else:
-                self.color_links.append(SankeyGraph.MATOMO_LINK_COLOR)
+                self.color_links.append(SankeyGraph.LINK_COLOR)
 
 
 
@@ -325,7 +350,7 @@ def main(filename, print):
 
     # breakpoint()
     gr = SankeyGraph(ws)
-    
+    # breakpoint()
     if print:
         gr.print_graph()
     

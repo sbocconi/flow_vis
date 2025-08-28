@@ -1,100 +1,54 @@
-- Registration/login 
-  - Content management <!-- Content Management -->
-    - My contents
-      - Add content
-        - Edit new content form
-          - Save new content form
-    - Open url
-    - Actions
-      - View content
-      - Edit content
-        - Save content
-      - Contributors
+- Start
+  - Registration
+  - Login
+    - Content management <!-- Content Management -->
+      - My contents
+        - Add content
+        - Edit content
         - Add contributor
-          - Edit contributor form
-            - Save contributor form
-      - Create NFT
-      - Delete content
-        - Confirm delete content
-    - Shared contents
-      - Todo
-    - My teams
-      - View team content
-        - Add team content
-          - Save team content
-        - Members
-    - Organizations
-      - Add new organisation
-        - Save new organisation
-      - View organisation
-        - Edit organisation
-          - Save organisation
-        - Add team
-          - Save team
-        - View existing team
-          - Edit existing team
-            - Save existing team
-          - Add member
-            - Save member
-          - Remove member
-            - Confirm remove member
-  - DAO <!-- DAO -->
-    - Proposals
-      - Add voting proposal
-      - View proposal details
-        - Vote for proposal
-  - NFT marketplace <!-- Marketplace -->
-    - Marketplace
-      - Search item
+        - Create NFT
+        - Delete content
+        - Link to competition
+        - Unlink from competition
+      - My teams
+        - View team
+          - Add team content
+      - Organizations
+        - Add new organisation
+        - View organisation
+          - Edit organisation
+          - Add team
+          - View existing team
+            - Edit existing team
+            - Add member
+            - Remove member
+    - DAO <!-- DAO -->
+      - Proposals
+        - Add voting proposal
+        - View proposal details
+          - Vote for proposal
+    - NFT marketplace <!-- Marketplace -->
+      - Marketplace
         - View NFT item
-      - Filter item by tag
-        - View NFT item
-      - Filter by recommendation
-        - View NFT item
-      - View NFT item
-        - Add item to whishlist
-        - Remove item to whishlist
-        - Buy item
-        - Put item on sale
-        - Remove item on sale
-        - Star item
-        - Report item
-        - Share item
-      - Upload item
-        - As NFT
-        - As free item
-    - Wishlist
-      - View NFT item
-      - Add item to whishlist
-      - Remove item to whishlist
-    - Portfolio
-      - View NFT item
-      - Add item to whishlist
-      - Remove item to whishlist
-      - Created
-        - View NFT item
-  - Tools catalogue <!-- Tools catalogue -->
-<!--    - See more of Art Generator - SYN -->
-<!--      - Download Art Generator - SYN -->
-    - See more of Tool
-      - Visit repository of Tool
+          - Buy item
+          - Put item on sale
+          - Remove item on sale
+          - Star item
+          - Report item
+          - Share item
+        - Upload item
+          - As NFT
+          - As free item
+    - Tools catalogue <!-- Tools catalogue -->
+      - See more of hosted Tool 
+        - Visit repository of hosted Tool
+        - Go to hosted Tool
+      - Go to hosted Tool
+        - Use hosted Tool :id:source:db:id:
+      - See more of Tool 
+        - Visit repository of Tool
+        - Go to Tool
       - Go to Tool
-
-<!-- Go to Art Generator - SYN -->
-    - Go to Tool
-      - Use Tool :id:source: db:id:
-
-  - Faq & chat <!-- Faq & Chat -->
-    - General q's
-      - Any question
-    - How-to videos
-      - Watching any video
-    - Contact us
-      - Edit contact form
-        - Send contact form
-      - Subscribe to newsletter
-  - Connect wallet <!-- Connect Wallet  -->
-  - Profile <!-- Fill in/visit Profile -->
-    - Edit profile
-      - Save profile
-    - Change password
+        - Use Tool :id:source:matomo:id:
+    - Competitions
+      - View competition

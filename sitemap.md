@@ -1,155 +1,165 @@
-- Registration/login 
-  - Content management <!-- Content Management -->
-    - My contents
-      - Add content
-        - Edit new content form
-          - Save new content form
-    - Open url
-    - Actions
-      - View content
-      - Edit content
-        - Save content
-      - Contributors
-        - Add contributor
-          - Edit contributor form
-            - Save contributor form
-      - Create NFT
-      - Delete content
-        - Confirm delete content
-    - Shared contents
-      - Todo
-    - My teams
-      - View team content
-        - Add team content
-          - Save team content
-        - Members
-    - Organizations
-      - Add new organisation
-        - Save new organisation
-      - View organisation
-        - Edit organisation
-          - Save organisation
-        - Add team
-          - Save team
-        - View existing team
-          - Edit existing team
-            - Save existing team
-          - Add member
-            - Save member
-          - Remove member
-            - Confirm remove member
-  - DAO <!-- DAO -->
-    - Proposals
-      - Add voting proposal
-      - View proposal details
-        - Vote for proposal
-  - NFT marketplace <!-- Marketplace -->
-    - Marketplace
-      - Search item
+- Start
+  - Registration
+  - Login
+    - Content management <!-- Content Management -->
+      - My contents
+        - Add content
+          - Edit new content form
+            - Save new content form
+      - Open url content
+      - Actions content
+        - View content
+        - Edit content
+          - Save content
+        - Contributors content
+          - Add contributor
+            - Edit contributor form
+              - Save contributor form
+        - Create NFT
+        - Delete content
+          - Confirm delete content
+        - Link to competition
+          - Add Content to Competition
+        - Unlink from competition
+      - Shared contents
+        - Open url shared content
+        - Actions
+          - View shared content
+          - Contributors shared content
+      - My teams
+        - View team content
+          - Add team content
+            - Save team content
+          - Members
+      - Organizations
+        - Add new organisation
+          - Save new organisation
+        - View organisation
+          - Edit organisation
+            - Save organisation
+          - Add team
+            - Save team
+          - View existing team
+            - Edit existing team
+              - Save existing team
+            - Add member
+              - Save member
+            - Remove member
+              - Confirm remove member
+    - DAO <!-- DAO -->
+      - Proposals
+        - Add voting proposal
+        - View proposal details
+          - Vote for proposal
+    - NFT marketplace <!-- Marketplace -->
+      - Marketplace
+        - Search item
+          - View NFT item
+        - Filter item by tag
+          - View NFT item
+        - Filter by recommendation
+          - View NFT item
         - View NFT item
-      - Filter item by tag
+          - Add item to wishlist
+          - Remove item from wishlist
+          - Buy item
+          - Put item on sale
+          - Remove item on sale
+          - Star item
+          - Report item
+          - Share item
+        - Upload item
+          - As NFT
+          - As free item
+      - Wishlist
         - View NFT item
-      - Filter by recommendation
-        - View NFT item
-      - View NFT item
-        - Add item to whishlist
-        - Remove item to whishlist
-        - Buy item
-        - Put item on sale
-        - Remove item on sale
-        - Star item
-        - Report item
-        - Share item
-      - Upload item
-        - As NFT
-        - As free item
-    - Wishlist
-      - View NFT item
-      - Add item to whishlist
-      - Remove item to whishlist
-    - Portfolio
-      - View NFT item
-      - Add item to whishlist
-      - Remove item to whishlist
-      - Created
-        - View NFT item
-  - Tools catalogue <!-- Tools catalogue -->
-<!--    - See more of Art Generator - SYN -->
-<!--      - Download Art Generator - SYN -->
-    - See more of Style Transfer - SYN 
-      - Visit repository Style Transfer - SYN
-      - Go to Style Transfer - SYN 
-    - See more of 3D Object Reconstruction - CERTH
-      - Visit repository 3D Object Reconstruction - CERTH
-      - Go to 3D Object Reconstruction - CERTH
-    - See more of 3D Human Pose Estimation - CERTH
-      - Visit repository 3D Human Pose Estimation - CERTH
-      - Go to 3D Human Pose Estimation - CERTH
-    - See more of Virtual Avatar Personalization - CERTH
-      - Visit repository Virtual Avatar Personalization - CERTH
-      - Go to Virtual Avatar Personalization - CERTH
-    - See more of WebPd - IRCAM
-      - Visit repository WebPd - IRCAM
-      - Go to WebPd - IRCAM
-    - See more of RAVE - IRCAM
-      - Download RAVE - IRCAM
-      - Visit repository RAVE - IRCAM
-      - Go to RAVE - IRCAM
-    - See more of nn~ - IRCAM
-      - Download nn~ - IRCAM
-      - Visit repository nn~ - IRCAM
-      - Go to nn~ - IRCAM
-    - See more of Dicy2 - IRCAM
-      - Download Dicy2 - IRCAM
-      - Visit repository Dicy2 - IRCAM
-      - Go to Dicy2 - IRCAM
-    - See more of Spat - IRCAM
-      - Download Spat - IRCAM
-      - Visit repository Spat - IRCAM
-      - Go to Spat - IRCAM
-    - See more of Soundworks - IRCAM
-      - Download Soundworks - IRCAM
-      - Visit repository Soundworks - IRCAM
-      - Go to Soundworks - IRCAM
-    - See more of CoMo Elements - IRCAM
-      - Download CoMo Elements - IRCAM
-      - Visit repository CoMo Elements - IRCAM
-      - Go to CoMo Elements - IRCAM
+        - Add item to wishlist
+        - Remove item from wishlist
+      - Portfolio
+        - Owned
+          - Edit profile portfolio
+          - View NFT item
+          - Add item to wishlist
+          - Remove item from wishlist
+        - Created
+          - View NFT item
+    - Tools catalogue <!-- Tools catalogue -->
+      - See more of Style Transfer - SYN 
+        - Visit repository Style Transfer - SYN
+        - Go to Style Transfer - SYN 
+      - See more of 3D Object Reconstruction - CERTH
+        - Visit repository 3D Object Reconstruction - CERTH
+        - Go to 3D Object Reconstruction - CERTH
+      - See more of 3D Human Pose Estimation - CERTH
+        - Visit repository 3D Human Pose Estimation - CERTH
+        - Go to 3D Human Pose Estimation - CERTH
+      - See more of Virtual Avatar Personalization - CERTH
+        - Visit repository Virtual Avatar Personalization - CERTH
+        - Go to Virtual Avatar Personalization - CERTH
+      - See more of WebPd - IRCAM
+        - Visit repository WebPd - IRCAM
+        - Go to WebPd - IRCAM
+      - See more of RAVE - IRCAM
+        - Download RAVE - IRCAM
+        - Visit repository RAVE - IRCAM
+        - Go to RAVE - IRCAM
+      - See more of nn~ - IRCAM
+        - Download nn~ - IRCAM
+        - Visit repository nn~ - IRCAM
+        - Go to nn~ - IRCAM
+      - See more of Dicy2 - IRCAM
+        - Download Dicy2 - IRCAM
+        - Visit repository Dicy2 - IRCAM
+        - Go to Dicy2 - IRCAM
+      - See more of Spat - IRCAM
+        - Download Spat - IRCAM
+        - Visit repository Spat - IRCAM
+        - Go to Spat - IRCAM
+      - See more of Soundworks - IRCAM
+        - Download Soundworks - IRCAM
+        - Visit repository Soundworks - IRCAM
+        - Go to Soundworks - IRCAM
+      - See more of CoMo Elements - IRCAM
+        - Download CoMo Elements - IRCAM
+        - Visit repository CoMo Elements - IRCAM
+        - Go to CoMo Elements - IRCAM
 
-<!-- Go to Art Generator - SYN -->
-    - Go to Style Transfer - SYN
-      - Use Style Transfer - SYN :id:source: db:id:
-    - Go to 3D Object Reconstruction - CERTH
-      - Use 3D Object Reconstruction - CERTH
-    - Go to 3D Human Pose Estimation - CERTH
-      - Use 3D Human Pose Estimation - CERTH
-    - Go to Virtual Avatar Personalization - CERTH :id:test:false:id:
-      - Use Virtual Avatar Personalization - CERTH :id:source:db, test:false:id:
-    - Go to WebPd - IRCAM
-      - Use WebPd - IRCAM :id:source:db:id:
-    - Go to RAVE - IRCAM
-      - Use RAVE - IRCAM :id:source:db:id:
-    - Go to nn~ - IRCAM
-      - Use nn~ - IRCAM :id:source:db:id:
-    - Go to Dicy2 - IRCAM
-      - Use Dicy2 - IRCAM :id:source:db:id:
-    - Go to Spat - IRCAM
-      - Spat - IRCAM :id:source:db:id:
-    - Go to Soundworks - IRCAM
-      - Use Soundworks - IRCAM :id:source:db:id:
-    - Go to CoMo Elements - IRCAM
-      - Use CoMo Elements - IRCAM :id:source:db:id:
-  - Faq & chat <!-- Faq & Chat -->
-    - General q's
-      - Any question
-    - How-to videos
-      - Watching any video
-    - Contact us
-      - Edit contact form
-        - Send contact form
-      - Subscribe to newsletter
-  - Connect wallet <!-- Connect Wallet  -->
-  - Profile <!-- Fill in/visit Profile -->
-    - Edit profile
-      - Save profile
-    - Change password
+      - Go to Style Transfer - SYN
+        - Use Style Transfer - SYN :id:source:db:id:
+      - Go to 3D Object Reconstruction - CERTH
+        - Use 3D Object Reconstruction - CERTH
+      - Go to 3D Human Pose Estimation - CERTH
+        - Use 3D Human Pose Estimation - CERTH
+      - Go to Virtual Avatar Personalization - CERTH :id:test:false:id:
+        - Use Virtual Avatar Personalization - CERTH :id:source:db, test:false:id:
+      - Go to WebPd - IRCAM
+        - Use WebPd - IRCAM :id:source:db:id:
+      - Go to RAVE - IRCAM
+        - Use RAVE - IRCAM :id:source:db:id:
+      - Go to nn~ - IRCAM
+        - Use nn~ - IRCAM :id:source:db:id:
+      - Go to Dicy2 - IRCAM
+        - Use Dicy2 - IRCAM :id:source:db:id:
+      - Go to Spat - IRCAM
+        - Spat - IRCAM :id:source:db:id:
+      - Go to Soundworks - IRCAM
+        - Use Soundworks - IRCAM :id:source:db:id:
+      - Go to CoMo Elements - IRCAM
+        - Use CoMo Elements - IRCAM :id:source:db:id:
+    - Competitions
+      - Actions competitions
+        - View competition
+    - Faq & chat <!-- Faq & Chat -->
+      - General q's
+        - Any question
+      - How-to videos
+        - Watching any video
+      - Contact us
+        - Edit contact form
+          - Send contact form
+        - Subscribe to newsletter
+    - Connect wallet <!-- Connect Wallet  -->
+    - Profile <!-- Fill in/visit Profile -->
+      - Edit profile
+        - Save profile
+      - Change password
